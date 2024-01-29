@@ -14,8 +14,8 @@ function ToastPlayground() {
     setMessage,
     variant,
     setVariant,
-    addToast,
     toasts,
+    addToast,
     removeToast,
   } = React.useContext(ToastContext);
 

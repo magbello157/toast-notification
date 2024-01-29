@@ -8,6 +8,20 @@ function ToastProvider({ children }) {
   const [variant, setVariant] = React.useState('notice');
   const [toasts, setToasts] = React.useState([]);
 
+  React.useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.code === 'Escape') {
+        setToasts([]);
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   function addToast(event) {
     event.preventDefault();
 
