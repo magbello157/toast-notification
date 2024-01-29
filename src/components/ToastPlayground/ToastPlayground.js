@@ -1,41 +1,23 @@
 import React from 'react';
 
+import { ToastContext } from '../ToastProvider';
 import Button from '../Button';
+import ToastShelf from '../ToastShelf/ToastShelf';
 
 import styles from './ToastPlayground.module.css';
-import ToastShelf from '../ToastShelf/ToastShelf';
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
-  const [message, setMessage] = React.useState('');
-  // notice | warning | success | error
-  const [variant, setVariant] = React.useState('notice');
-  const [toasts, setToasts] = React.useState([]);
-
-  function addToast(event) {
-    event.preventDefault();
-
-    if (message !== '') {
-      const nextToasts = [
-        ...toasts,
-        {
-          id: crypto.randomUUID(),
-          message,
-          variant,
-        },
-      ];
-
-      setToasts(nextToasts);
-      setMessage('');
-      setVariant('notice');
-    }
-  }
-
-  function removeToast(id) {
-    const nextToasts = toasts.filter((toast) => toast.id !== id);
-    setToasts(nextToasts);
-  }
+  const {
+    message,
+    setMessage,
+    variant,
+    setVariant,
+    addToast,
+    toasts,
+    removeToast,
+  } = React.useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
