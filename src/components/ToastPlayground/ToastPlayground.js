@@ -9,15 +9,8 @@ import styles from './ToastPlayground.module.css';
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
-  const {
-    message,
-    setMessage,
-    variant,
-    setVariant,
-    toasts,
-    addToast,
-    removeToast,
-  } = React.useContext(ToastContext);
+  const { message, setMessage, variant, setVariant, createToast } =
+    React.useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
@@ -26,9 +19,9 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toasts={toasts} removeToast={removeToast} />
+      <ToastShelf />
 
-      <form className={styles.controlsWrapper} onSubmit={addToast}>
+      <form className={styles.controlsWrapper} onSubmit={createToast}>
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -56,7 +49,7 @@ function ToastPlayground() {
               const id = `variant-${option}`;
 
               return (
-                <label htmlFor={id} key={option}>
+                <label key={id} htmlFor={id}>
                   <input
                     id={id}
                     type="radio"
